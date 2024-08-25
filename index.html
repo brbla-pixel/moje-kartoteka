@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nemocniční záznamy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0078d7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            margin: 20px;
+        }
+        .form-container {
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #0078d7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #005bb5;
+        }
+        .patient-list {
+            margin-top: 20px;
+        }
+        .patient-item {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .patient-item a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+        .patient-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Nemocniční záznamy pacientů</h1>
+</header>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Přidat pacienta</h2>
+        <form id="patientForm">
+            <label for="name">Jméno pacienta:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="age">Věk:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="diagnosis">Diagnóza:</label>
+            <input type="text" id="diagnosis" name="diagnosis" required>
+
+            <button type="submit">Přidat pacienta</button>
+        </form>
+    </div>
+
+    <div class="patient-list">
+        <h2>Seznam pacientů</h2>
+        <div id="patients"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('patientForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        const diagnosis = document.getElementById('diagnosis').value;
+
+        const patientList = document.getElementById('patients');
+
+        const patientItem = document.createElement('div');
+        patientItem.className = 'patient-item';
+
+        const patientLink = document.createElement('a');
+        patientLink.href = '#';
+        patientLink.innerText = name;
+
+        patientLink.addEventListener('click', function() {
+            alert('Jméno: ' + name + '\nVěk: ' + age + '\nDiagnóza: ' + diagnosis);
+        });
+
+        patientItem.appendChild(patientLink);
+        patientList.appendChild(patientItem);
+
+        document.getElementById('patientForm').reset();
+    });
+</script>
+
+</body>
+</html>
